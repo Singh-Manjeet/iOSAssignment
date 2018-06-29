@@ -62,9 +62,42 @@ private extension FactsViewController {
         tableView.sectionFooterHeight = CGFloat.leastNonzeroMagnitude
     }
     
-    func setupDataSource() {}
+    func setupDataSource() {
+        viewModel = FactsViewModel(delegate: self)
+        dataSource = FactsDataSource(for: tableView)
+        navigationItem.title = viewModel.title
+        viewModel.fetchData()
+    }
+    
+    func presentError(with message: String) {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
+    }
     
     @objc func didReloadRefreshControl(_ sender: UIRefreshControl) {
         viewModel.fetchData()
+    }
+}
+
+// MARK: - FactsViewModelDelegate
+extension FactsViewController: FactsViewModelDelegate {
+    func stateDidChange(_ state: ViewControllerAPIDataState<FactsContainer>) {
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+        }
+        
+        switch state {
+        case .loaded:
+            dataSource.state = state
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        case .error(let error):
+            presentError(with: error.message)
+        default:
+            break
+        }
     }
 }

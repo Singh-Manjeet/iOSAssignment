@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-// MARK: - Container
+// MARK: - Data Container
 struct FactsContainer {
     let facts: [Fact]
 }
@@ -21,11 +21,23 @@ enum FactsCellType {
     case loading
 }
 
+// MARK: - DataSource Protocol
+protocol FactsDataSourceProtocol {
+    var state: ViewControllerAPIDataState<FactsContainer> { get set }
+    func cellType(at indexPath: IndexPath) -> FactsCellType
+}
+
+typealias ViewControllerAPIDataState<T> = DataState<T, APIError>
 // MARK: - View Controller DataSource
-class FactsDataSource: NSObject, UITableViewDataSource {
+class FactsDataSource: NSObject, UITableViewDataSource, FactsDataSourceProtocol {
     
     // MARK: - Vars
     var cellTypes: [FactsCellType] = []
+    var state: ViewControllerAPIDataState<FactsContainer>  = .loading {
+        didSet {
+            cellTypes = buildCellTypes()
+        }
+    }
     
     init(for tableView: UITableView) {
         super.init()
@@ -44,7 +56,43 @@ extension FactsDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //TODO:
+        //TODO: fact cell, loading cell, empty cell
+        let cellAtIndex = cellType(at: indexPath)
+        
+        switch cellAtIndex {
+        case .loading: break
+        case .facts: break
+        case .empty: break
+        }
+        
         return UITableViewCell()
+    }
+}
+
+// MARK: - Cell Builder
+extension FactsDataSource {
+    func buildCellTypes() -> [FactsCellType] {
+        
+        switch state {
+        case .loaded(let container):
+            cellTypes.removeAll()
+            
+            guard !container.facts.isEmpty else {
+                cellTypes.append(.empty)
+                return cellTypes
+            }
+            
+            for fact in container.facts {
+                let cellType = FactsCellType.facts(fact)
+                cellTypes.append(cellType)
+            }
+        case .loading:
+            cellTypes.append(.loading)
+        case .error:
+            cellTypes.removeAll()
+            cellTypes.append(.empty)
+        }
+        
+        return cellTypes
     }
 }
