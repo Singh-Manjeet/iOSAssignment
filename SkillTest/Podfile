@@ -1,0 +1,7 @@
+target 'SkillTest' do
+platform :ios, '9.0'
+use_frameworks!
+
+# Pods for SkillTest
+    pod 'SwiftyJSON', '~> 4.0'
+end

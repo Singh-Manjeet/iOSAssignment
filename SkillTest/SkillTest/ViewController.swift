@@ -13,6 +13,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red
+        
+        //temporary api call
+        APIClient.getFacts(url: Constants.baseUrl) { (isSuccessful, country) in
+            print(country)
+        }
     }
 }
 
