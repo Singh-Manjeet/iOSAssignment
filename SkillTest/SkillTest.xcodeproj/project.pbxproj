@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		30AABDCF20E6582400D4E976 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABDCE20E6582400D4E976 /* AppDelegate.swift */; };
 		30AABDD120E6582400D4E976 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABDD020E6582400D4E976 /* ViewController.swift */; };
-		30AABDD420E6582400D4E976 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30AABDD220E6582400D4E976 /* Main.storyboard */; };
 		30AABDD620E6582400D4E976 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30AABDD520E6582400D4E976 /* Assets.xcassets */; };
-		30AABDD920E6582400D4E976 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30AABDD720E6582400D4E976 /* LaunchScreen.storyboard */; };
 		30AABDE420E6582400D4E976 /* SkillTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABDE320E6582400D4E976 /* SkillTestTests.swift */; };
 		30AABDEF20E6582400D4E976 /* SkillTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABDEE20E6582400D4E976 /* SkillTestUITests.swift */; };
 /* End PBXBuildFile section */
@@ -37,9 +35,7 @@
 		30AABDCB20E6582400D4E976 /* SkillTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30AABDCE20E6582400D4E976 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30AABDD020E6582400D4E976 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		30AABDD320E6582400D4E976 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		30AABDD520E6582400D4E976 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		30AABDD820E6582400D4E976 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30AABDDA20E6582400D4E976 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30AABDDF20E6582400D4E976 /* SkillTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkillTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30AABDE320E6582400D4E976 /* SkillTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillTestTests.swift; sourceTree = "<group>"; };
@@ -99,9 +95,7 @@
 			children = (
 				30AABDCE20E6582400D4E976 /* AppDelegate.swift */,
 				30AABDD020E6582400D4E976 /* ViewController.swift */,
-				30AABDD220E6582400D4E976 /* Main.storyboard */,
 				30AABDD520E6582400D4E976 /* Assets.xcassets */,
-				30AABDD720E6582400D4E976 /* LaunchScreen.storyboard */,
 				30AABDDA20E6582400D4E976 /* Info.plist */,
 			);
 			path = SkillTest;
@@ -232,9 +226,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30AABDD920E6582400D4E976 /* LaunchScreen.storyboard in Resources */,
 				30AABDD620E6582400D4E976 /* Assets.xcassets in Resources */,
-				30AABDD420E6582400D4E976 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,25 +286,6 @@
 			targetProxy = 30AABDEB20E6582400D4E976 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		30AABDD220E6582400D4E976 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				30AABDD320E6582400D4E976 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		30AABDD720E6582400D4E976 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				30AABDD820E6582400D4E976 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		30AABDF120E6582400D4E976 /* Debug */ = {
@@ -425,7 +398,7 @@
 		30AABDF420E6582400D4E976 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = SkillTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -439,7 +412,7 @@
 		30AABDF520E6582400D4E976 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = SkillTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
