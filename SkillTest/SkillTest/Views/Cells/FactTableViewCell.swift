@@ -11,75 +11,40 @@ import UIKit
 import SnapKit
 import Kingfisher
 
+private enum Metrics {
+    static let spacing: CGFloat = 13.0
+    static let top: CGFloat = 13.0
+    static let bottom: CGFloat = 13.0
+}
+
 class FactTableViewCell: UITableViewCell, Reusable {
-    //MARK: Subviews
-    var titleLabel: UILabel!
-    var descriptionLabel: UILabel!
-    var iconView: UIImageView!
+    
+    //MARK: - Vars
+    private var titleLabel: UILabel!
+    private var descriptionLabel: UILabel!
+    private var factImageView: UIImageView!
+    private var allConstraints: [NSLayoutConstraint] = []
     
     //MARK: init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         addSubViewsAndlayout()
+        makeSubViewsConstraintReady()
         formatLabels()
+        setupConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    internal var aspectConstraint : NSLayoutConstraint? {
-        didSet {
-            if oldValue != nil {
-                iconView.removeConstraint(oldValue!)
-            }
-            if aspectConstraint != nil {
-                aspectConstraint?.priority = UILayoutPriority(999)
-                iconView.addConstraint(aspectConstraint!)
-            }
-        }
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        aspectConstraint = nil
-    }
-    
     func addSubViewsAndlayout() {
-        titleLabel = UILabel(frame: .zero)
-        titleLabel.numberOfLines = 0
-        titleLabel.lineBreakMode = .byWordWrapping
-        titleLabel.clipsToBounds = true
+        titleLabel = initLabel()
+        descriptionLabel = initLabel()
+        factImageView = initImageView()
         
-        descriptionLabel = UILabel(frame: .zero)
-        descriptionLabel.numberOfLines = 0
-        descriptionLabel.lineBreakMode = .byWordWrapping
-        descriptionLabel.clipsToBounds = true
-        
-        iconView = UIImageView(frame: .zero)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        iconView.translatesAutoresizingMaskIntoConstraints = false
-        iconView.contentMode = .scaleAspectFit
-        iconView.clipsToBounds = true
-        
-        contentView.addSubview(iconView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(descriptionLabel)
-        
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(iconView.snp.bottom).offset(13.0)
-            make.leftMargin.rightMargin.equalToSuperview()
-        }
-        
-        descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(13.0)
-            make.leftMargin.rightMargin.equalTo(contentView)
-            make.bottom.equalTo(contentView.snp.bottomMargin)
-        }
-        
-        iconView.snp.makeConstraints { make in
-            make.top.left.right.equalTo(contentView)
-        }
+        addSubView(subViews: [titleLabel, descriptionLabel, factImageView])
     }
     
     /**
@@ -87,28 +52,21 @@ class FactTableViewCell: UITableViewCell, Reusable {
      * Parameters: Fact
      */
     func populate(with fact: Fact) {
+        factImageView.image = nil
         titleLabel.attributedText = NSAttributedString(string: fact.title ?? "", attributes:
             [.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
         descriptionLabel.text = fact.description
         
-        if let factImageURL = fact.imageHref,
-            let imageURL = URL(string: factImageURL) {
-            iconView.kf.indicatorType = .activity
-            
-            let resource = ImageResource(downloadURL: imageURL, cacheKey: factImageURL)
-            
-            
-            self.iconView.kf.setImage(with: resource,
-                                      completionHandler: { [weak self]  (image, error, cacheType, imageUrl) in
-                                        
-                                        guard let strongSelf = self, let image = image else { return }
-                                        let aspect = image.size.width / image.size.height
-                                        strongSelf.aspectConstraint = NSLayoutConstraint(item: strongSelf.iconView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: strongSelf.iconView, attribute: NSLayoutAttribute.height, multiplier: aspect, constant: 0.0)
-                                        
-                                        strongSelf.layoutIfNeeded()
-                                        strongSelf.updateConstraintsIfNeeded()
-            })
-        }
+        guard let iconURL = URL(string: fact.imageHref ?? ""),
+            factImageView.image == nil else { return }
+        
+        factImageView.kf.indicatorType = .activity
+        factImageView.kf.setImage(with: iconURL,
+                             placeholder: UIImage(named:"placeholderImage"),
+                             options: [.transition(ImageTransition.fade(1))],
+                             completionHandler: { [weak self] image, error, cacheType, imageURL in
+                                self?.factImageView.kf.indicatorType = .none
+        })
     }
 }
 
@@ -119,5 +77,59 @@ private extension FactTableViewCell {
             $0?.textColor = .orange
             $0?.font = UIFont(name: "Helvetica", size: 16.0)
         }
+    }
+    
+    func makeSubViewsConstraintReady() {
+        [titleLabel, descriptionLabel, factImageView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    func initLabel() -> UILabel {
+        let label = UILabel(frame: .zero)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        return label
+    }
+    
+    func initImageView() -> UIImageView {
+        let imageView = UIImageView(frame: .zero)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
+    }
+    
+    func addSubView(subViews: [UIView]) {
+        subViews.forEach { contentView.addSubview($0) }
+    }
+    
+    func setupConstraints() {
+        if !allConstraints.isEmpty {
+            NSLayoutConstraint.deactivate(allConstraints)
+            allConstraints.removeAll()
+        }
+        
+        let views: [String: UIView] = ["factImageView": factImageView, "titleLabel": titleLabel, "descriptionLabel": descriptionLabel]
+        
+        let metrics = [
+            "verticalSpacing": Metrics.spacing,
+            "topMargin": Metrics.top,
+            "bottomMargin": Metrics.bottom,
+            "leftMargin": Metrics.spacing,
+            "rightMargin": Metrics.spacing]
+        
+        // factImageView is as wide as its superView and it is stuck to both sides
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-leftMargin-[factImageView]-rightMargin-|", options: [], metrics: metrics, views: views)
+        
+        // titleLabel is with dynamic height and stuck to both sides
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-leftMargin-[titleLabel]-rightMargin-|", options: [], metrics: metrics, views: views)
+        
+        // descriptionLabel is with dynamic height and stuck to both sides
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-leftMargin-[descriptionLabel]-rightMargin-|", options: [], metrics: metrics, views: views)
+        
+        // vertical constraints
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-topMargin-[factImageView]-verticalSpacing-[titleLabel(30)]-verticalSpacing-[descriptionLabel]-bottomMargin-|", options: [], metrics: metrics, views: views)
+        
+        NSLayoutConstraint.activate(allConstraints)
     }
 }

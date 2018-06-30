@@ -35,6 +35,10 @@ class FactsViewController: UIViewController {
         setupTableView()
         setupDataSource()
     }
+    
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+    }
 }
 
 // MARK: - Privates
