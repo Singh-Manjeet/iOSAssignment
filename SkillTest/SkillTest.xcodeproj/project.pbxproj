@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3001FA7420E7AB4C00E13AFA /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA7320E7AB4C00E13AFA /* Reusable.swift */; };
+		3001FA7720E7AB8900E13AFA /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA7620E7AB8900E13AFA /* EmptyTableViewCell.swift */; };
+		3001FA7920E7ABC900E13AFA /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA7820E7ABC900E13AFA /* LoadingTableViewCell.swift */; };
+		3001FA7B20E7ABEE00E13AFA /* FactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA7A20E7ABEE00E13AFA /* FactTableViewCell.swift */; };
 		30AABDCF20E6582400D4E976 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABDCE20E6582400D4E976 /* AppDelegate.swift */; };
 		30AABDD620E6582400D4E976 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30AABDD520E6582400D4E976 /* Assets.xcassets */; };
 		30AABDE420E6582400D4E976 /* SkillTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABDE320E6582400D4E976 /* SkillTestTests.swift */; };
@@ -40,6 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3001FA7320E7AB4C00E13AFA /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		3001FA7620E7AB8900E13AFA /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
+		3001FA7820E7ABC900E13AFA /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
+		3001FA7A20E7ABEE00E13AFA /* FactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactTableViewCell.swift; sourceTree = "<group>"; };
 		30AABDCB20E6582400D4E976 /* SkillTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30AABDCE20E6582400D4E976 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30AABDD520E6582400D4E976 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -95,6 +103,16 @@
 				3E4582AF40FED3ECB87AAB4A /* Pods_SkillTest.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3001FA7520E7AB7500E13AFA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3001FA7620E7AB8900E13AFA /* EmptyTableViewCell.swift */,
+				3001FA7820E7ABC900E13AFA /* LoadingTableViewCell.swift */,
+				3001FA7A20E7ABEE00E13AFA /* FactTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		30AABDC220E6582400D4E976 = {
@@ -179,6 +197,7 @@
 		30AABE0720E68ED700D4E976 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3001FA7520E7AB7500E13AFA /* Cells */,
 				30AABE0820E68EEE00D4E976 /* FactsViewController.swift */,
 				30AABE0A20E6902500D4E976 /* FactsViewModel.swift */,
 				30AABE0C20E6907100D4E976 /* FactsDataSource.swift */,
@@ -191,6 +210,7 @@
 			children = (
 				30AABE0F20E6944300D4E976 /* DataState.swift */,
 				30AABE1120E69C3C00D4E976 /* ErrorPresentable.swift */,
+				3001FA7320E7AB4C00E13AFA /* Reusable.swift */,
 			);
 			name = Extensions;
 			path = SkillTest/Extensions;
@@ -384,13 +404,17 @@
 			files = (
 				30AABE0B20E6902500D4E976 /* FactsViewModel.swift in Sources */,
 				30AABE0420E65D9D00D4E976 /* Constants.swift in Sources */,
+				3001FA7920E7ABC900E13AFA /* LoadingTableViewCell.swift in Sources */,
 				30AABE0120E65CCF00D4E976 /* Fact.swift in Sources */,
 				30AABDCF20E6582400D4E976 /* AppDelegate.swift in Sources */,
+				3001FA7420E7AB4C00E13AFA /* Reusable.swift in Sources */,
 				30AABDFE20E65BBF00D4E976 /* APIClient.swift in Sources */,
 				30AABE1020E6944300D4E976 /* DataState.swift in Sources */,
 				30AABE0920E68EEE00D4E976 /* FactsViewController.swift in Sources */,
+				3001FA7B20E7ABEE00E13AFA /* FactTableViewCell.swift in Sources */,
 				30AABE0D20E6907100D4E976 /* FactsDataSource.swift in Sources */,
 				30AABE1220E69C3C00D4E976 /* ErrorPresentable.swift in Sources */,
+				3001FA7720E7AB8900E13AFA /* EmptyTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

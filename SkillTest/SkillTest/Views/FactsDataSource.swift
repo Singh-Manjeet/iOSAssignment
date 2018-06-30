@@ -25,6 +25,7 @@ enum FactsCellType {
 protocol FactsDataSourceProtocol {
     var state: ViewControllerAPIDataState<FactsContainer> { get set }
     func cellType(at indexPath: IndexPath) -> FactsCellType
+    func registerCells(for tableView: UITableView)
 }
 
 typealias ViewControllerAPIDataState<T> = DataState<T, APIError>
@@ -42,10 +43,17 @@ class FactsDataSource: NSObject, UITableViewDataSource, FactsDataSourceProtocol 
     init(for tableView: UITableView) {
         super.init()
         tableView.dataSource = self
+        registerCells(for: tableView)
     }
     
     func cellType(at indexPath: IndexPath) -> FactsCellType {
         return cellTypes[indexPath.row]
+    }
+    
+    func registerCells(for tableView: UITableView) {
+        tableView.register(FactTableViewCell.self)
+        tableView.register(LoadingTableViewCell.self)
+        tableView.register(EmptyTableViewCell.self)
     }
 }
 
@@ -56,16 +64,20 @@ extension FactsDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //TODO: fact cell, loading cell, empty cell
-        let cellAtIndex = cellType(at: indexPath)
+        let cellTypeAtIndex = cellType(at: indexPath)
         
-        switch cellAtIndex {
-        case .loading: break
-        case .facts: break
-        case .empty: break
+        switch cellTypeAtIndex {
+        case .loading:
+            let loadingCell: LoadingTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
+            return loadingCell
+        case .facts(let fact):
+            let factCell: FactTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
+            factCell.populate(with: fact)
+            return factCell
+        case .empty:
+            let emptyCell: EmptyTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
+            return emptyCell
         }
-        
-        return UITableViewCell()
     }
 }
 
