@@ -100,10 +100,9 @@ private extension FactTableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        
-        descriptionLabel.setContentHuggingPriority(.required, for: .vertical)
         [descriptionLabel, titleLabel].forEach {
-            $0.setContentCompressionResistancePriority(.required, for: .vertical)
+            $0?.setContentCompressionResistancePriority(.required, for: .vertical)
+            $0?.setContentHuggingPriority(.required, for: .vertical)
         }
     }
     
@@ -116,7 +115,8 @@ private extension FactTableViewCell {
     
     func initImageView() -> UIImageView {
         let imageView = UIImageView(frame: .zero)
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .black
         imageView.clipsToBounds = true
         return imageView
     }

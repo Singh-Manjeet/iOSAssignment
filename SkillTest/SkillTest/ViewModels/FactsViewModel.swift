@@ -33,6 +33,8 @@ final class FactsViewModel {
         }
     }
     
+    //MARK: - To Demonstrate
+    //Added both ways i.e Delegate pattern as well as Closure to get the response
     func fetchData() {
         guard Reachability.isConnectedToNetwork() else {
             self.state = .error(APIError(message: Design.noInternet, code: 0))
@@ -50,6 +52,30 @@ final class FactsViewModel {
                 strongSelf.country = country
                 let container = FactsContainer(facts: facts)
                 strongSelf.state = .loaded(container)
+            }
+        }
+    }
+    
+    //MARK: - Closure: Unit Testing
+    func getData(onCompletion: @escaping (_ state: ViewControllerAPIDataState<FactsContainer>) -> Void) {
+        func fetchData() {
+            guard Reachability.isConnectedToNetwork() else {
+                onCompletion(state)
+                return
+            }
+            
+            DispatchQueue.global(qos: .background).async {
+                APIClient.getFacts(url: APIConstants.baseUrl) { [weak self] (isSuccessful, country) in
+                    
+                    guard let country = country,
+                        let facts = country.facts,
+                        isSuccessful,
+                        let strongSelf = self else { return }
+                    
+                    strongSelf.country = country
+                    let container = FactsContainer(facts: facts)
+                    onCompletion(.loaded(container))
+                }
             }
         }
     }

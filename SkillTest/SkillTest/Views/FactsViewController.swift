@@ -67,9 +67,9 @@ private extension FactsViewController {
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.delegate = self
         tableView.estimatedRowHeight = Design.estimatedTableViewCellHeight
         tableView.separatorInset = .zero
+        tableView.allowsSelection = false
         view.addSubview(tableView)
         tableView.addSubview(refreshControl)
         tableView.sendSubview(toBack: refreshControl)
@@ -77,7 +77,6 @@ private extension FactsViewController {
         refreshControl.addTarget(self, action:
             #selector(type(of: self).didReloadRefreshControl(_:)), for: UIControlEvents.valueChanged)
         
-        //tableView.backgroundColor = .white
         tableView.tableFooterView = UIView()
         tableView.sectionFooterHeight = CGFloat.leastNonzeroMagnitude
         
@@ -126,6 +125,7 @@ private extension FactsViewController {
 // MARK: - FactsViewModelDelegate
 extension FactsViewController: FactsViewModelDelegate {
     func stateDidChange(_ state: ViewControllerAPIDataState<FactsContainer>) {
+       
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.stopAnimating()
@@ -143,11 +143,5 @@ extension FactsViewController: FactsViewModelDelegate {
             strongSelf.tableView.reloadData()
             strongSelf.tableView.layoutIfNeeded()
         }
-    }
-}
-
-extension FactsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

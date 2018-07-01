@@ -14,6 +14,9 @@ Implemented the complete functionality.
 2. Each module serves their own role and can be tested accordingly.
 3. Added appropriate cocoa pods.
 
+## Universal App:
+The app works on all iphone and ipad in Landscape & Portrait.
+
 ## Reusable:
 Added appropriate extension for UITableViewCells reusability.
 The cleanest solution i have come up to dequeue the cells.
