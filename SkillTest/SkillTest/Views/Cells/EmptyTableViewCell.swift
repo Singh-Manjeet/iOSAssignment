@@ -9,9 +9,13 @@
 import Foundation
 import UIKit
 
+private struct Design {
+    static let errorMessage = "No data available, Please try again"
+}
+
 class EmptyTableViewCell: UITableViewCell, Reusable {
     //MARK: Subviews
-    var titleLabel: UILabel {
+    private var titleLabel: UILabel {
         return UILabel(frame: .zero)
     }
     
@@ -22,11 +26,11 @@ class EmptyTableViewCell: UITableViewCell, Reusable {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
-    func addSubViewsAndlayout() {
-        titleLabel.text = "No data available, Please try again"
+    private func addSubViewsAndlayout() {
+        titleLabel.text = Design.errorMessage
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         contentView.addSubview(titleLabel)

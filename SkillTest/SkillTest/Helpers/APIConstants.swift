@@ -1,5 +1,5 @@
 //
-//  Constants.swift
+//  APIConstants.swift
 //  SkillTest
 //
 //  Created by Manjeet Singh on 29/6/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Constants {
+struct APIConstants {
     static let baseUrl = URL(string: "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json")!
 }
 

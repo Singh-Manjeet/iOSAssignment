@@ -9,22 +9,35 @@
 import Foundation
 import UIKit
 import SnapKit
+import NVActivityIndicatorView
 
 // MARK: - Design Constants
 private struct Design {
-    static let estimatedTableViewCellHeight: CGFloat = 100.0
+    static let estimatedTableViewCellHeight: CGFloat = 400.0
     
     struct Loading {
         static let fetchData: String = "Loading Data.."
     }
+    
+    struct LoadingAnimation {
+        static let height: CGFloat = 100.0
+        static let width: CGFloat = 100.0
+        static let xPosition: CGFloat = UIScreen.main.bounds.width / 2 - Design.LoadingAnimation.width / 2
+        static let yPosition: CGFloat = UIScreen.main.bounds.height / 2 - Design.LoadingAnimation.height / 2
+        
+        static let frame: CGRect = CGRect(x: Design.LoadingAnimation.xPosition,
+                                          y: Design.LoadingAnimation.yPosition,
+                                          width: Design.LoadingAnimation.width,
+                                          height: Design.LoadingAnimation.height)
+    }
 }
 
-class FactsViewController: UIViewController {
+class FactsViewController: UIViewController, NVActivityIndicatorViewable {
     
     // MARK: - Vars & IBOutlets
+    private var tableView: UITableView!
     private var dataSource: FactsDataSource!
     private var viewModel: FactsViewModel!
-    private var tableView: UITableView!
     
     var refreshControl = UIRefreshControl()
     
@@ -36,8 +49,15 @@ class FactsViewController: UIViewController {
         setupDataSource()
     }
     
-    override func viewSafeAreaInsetsDidChange() {
-        super.viewSafeAreaInsetsDidChange()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        startLoadingAnimation(withMessage: Design.Loading.fetchData)
+        fetchData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
     }
 }
 
@@ -47,12 +67,8 @@ private extension FactsViewController {
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
-        
-        tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.delegate = self
         tableView.estimatedRowHeight = Design.estimatedTableViewCellHeight
         tableView.separatorInset = .zero
         tableView.addSubview(refreshControl)
@@ -61,16 +77,34 @@ private extension FactsViewController {
         refreshControl.addTarget(self, action:
             #selector(type(of: self).didReloadRefreshControl(_:)), for: UIControlEvents.valueChanged)
         
-        tableView.backgroundColor = .white
+        //tableView.backgroundColor = .white
         tableView.tableFooterView = UIView()
         tableView.sectionFooterHeight = CGFloat.leastNonzeroMagnitude
+        
+        //constraints
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     func setupDataSource() {
         viewModel = FactsViewModel(delegate: self)
         dataSource = FactsDataSource(for: tableView)
+    }
+    
+    func startLoadingAnimation(withMessage message: String) {
+        let activityIndicatorView = NVActivityIndicatorView(frame: Design.LoadingAnimation.frame,
+                                                            type: NVActivityIndicatorType.lineScale)
+        self.view.addSubview(activityIndicatorView)
+        startAnimating(CGSize(width: activityIndicatorView.frame.width,
+                              height: activityIndicatorView.frame.height),
+                       message: message,
+                       type: NVActivityIndicatorType.lineScale)
+        
+    }
+    
+    func setNavigationTitle() {
         navigationItem.title = viewModel.title
-        viewModel.fetchData()
     }
     
     func presentError(with message: String) {
@@ -81,6 +115,10 @@ private extension FactsViewController {
     }
     
     @objc func didReloadRefreshControl(_ sender: UIRefreshControl) {
+        fetchData()
+    }
+    
+    func fetchData() {
         viewModel.fetchData()
     }
 }
@@ -88,20 +126,31 @@ private extension FactsViewController {
 // MARK: - FactsViewModelDelegate
 extension FactsViewController: FactsViewModelDelegate {
     func stateDidChange(_ state: ViewControllerAPIDataState<FactsContainer>) {
-        DispatchQueue.main.async {
-            self.refreshControl.endRefreshing()
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.stopAnimating()
+            strongSelf.refreshControl.endRefreshing()
         }
         
         switch state {
         case .loaded:
             dataSource.state = state
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.setNavigationTitle()
+                strongSelf.tableView.reloadData()
+                strongSelf.tableView.layoutIfNeeded()
             }
         case .error(let error):
             presentError(with: error.message)
-        default:
-            break
+        default: break
         }
+    }
+}
+
+extension FactsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

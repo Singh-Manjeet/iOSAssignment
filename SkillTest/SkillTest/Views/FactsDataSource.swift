@@ -95,6 +95,11 @@ extension FactsDataSource {
             }
             
             for fact in container.facts {
+                
+                guard fact.imageHref != nil,
+                      fact.title != nil,
+                      fact.description != nil else { continue }
+                
                 let cellType = FactsCellType.facts(fact)
                 cellTypes.append(cellType)
             }

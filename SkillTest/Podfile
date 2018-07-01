@@ -6,4 +6,5 @@ use_frameworks!
     pod 'SwiftyJSON', '~> 4.0'
     pod 'Kingfisher', '~> 4.0'
     pod 'SnapKit',    '~> 4.0.0'
+    pod 'NVActivityIndicatorView'
 end

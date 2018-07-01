@@ -11,10 +11,15 @@ import UIKit
 import SnapKit
 import Kingfisher
 
+private struct Design {
+    static let placeHolderImage = UIImage(named:"placeholderImage")
+}
+
 private enum Metrics {
     static let spacing: CGFloat = 13.0
     static let top: CGFloat = 13.0
     static let bottom: CGFloat = 13.0
+    static let minimumHeight: CGFloat = 22.0
 }
 
 class FactTableViewCell: UITableViewCell, Reusable {
@@ -36,7 +41,48 @@ class FactTableViewCell: UITableViewCell, Reusable {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+    }
+    
+    /**
+     * To populate the cell with Fact
+     * Parameters: Fact
+     */
+    func populate(with fact: Fact) {
+        updateUI(with: fact)
+    }
+}
+
+// MARK: - Private Helpers
+private extension FactTableViewCell {
+    
+    func formatLabels() {
+        [titleLabel, descriptionLabel].forEach {
+            $0?.textColor = .orange
+            $0?.font = UIFont(name: "Helvetica", size: 16.0)
+        }
+    }
+    
+    func updateUI(with fact: Fact) {
+        guard let title = fact.title,
+              let description = fact.description else { return }
+        
+        let formattedString = NSMutableAttributedString()
+        formattedString.bold(title)
+        titleLabel.attributedText = formattedString
+        
+        descriptionLabel.text = description
+        factImageView.image = nil
+    
+        guard let iconURL = URL(string: fact.imageHref ?? "") else { return }
+        
+        factImageView.kf.indicatorType = .activity
+        factImageView.kf.setImage(with: iconURL,
+                                  placeholder: Design.placeHolderImage,
+                                  options: [.transition(ImageTransition.fade(1))],
+                                  completionHandler: { [weak self] image, error, cacheType, imageURL in
+                                    self?.factImageView.kf.indicatorType = .none
+        })
     }
     
     func addSubViewsAndlayout() {
@@ -47,41 +93,15 @@ class FactTableViewCell: UITableViewCell, Reusable {
         addSubView(subViews: [titleLabel, descriptionLabel, factImageView])
     }
     
-    /**
-     * To populate the cell with Fact
-     * Parameters: Fact
-     */
-    func populate(with fact: Fact) {
-        factImageView.image = nil
-        titleLabel.attributedText = NSAttributedString(string: fact.title ?? "", attributes:
-            [.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
-        descriptionLabel.text = fact.description
-        
-        guard let iconURL = URL(string: fact.imageHref ?? ""),
-            factImageView.image == nil else { return }
-        
-        factImageView.kf.indicatorType = .activity
-        factImageView.kf.setImage(with: iconURL,
-                             placeholder: UIImage(named:"placeholderImage"),
-                             options: [.transition(ImageTransition.fade(1))],
-                             completionHandler: { [weak self] image, error, cacheType, imageURL in
-                                self?.factImageView.kf.indicatorType = .none
-        })
-    }
-}
-
-// MARK: - Private Helpers
-private extension FactTableViewCell {
-    func formatLabels() {
-        [titleLabel, descriptionLabel].forEach {
-            $0?.textColor = .orange
-            $0?.font = UIFont(name: "Helvetica", size: 16.0)
-        }
-    }
-    
     func makeSubViewsConstraintReady() {
         [titleLabel, descriptionLabel, factImageView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        
+        descriptionLabel.setContentHuggingPriority(.required, for: .vertical)
+        [descriptionLabel, titleLabel].forEach {
+            $0.setContentCompressionResistancePriority(.required, for: .vertical)
         }
     }
     
@@ -103,6 +123,7 @@ private extension FactTableViewCell {
         subViews.forEach { contentView.addSubview($0) }
     }
     
+    //MARK: - Constraints Setup Using Visual Format Language
     func setupConstraints() {
         if !allConstraints.isEmpty {
             NSLayoutConstraint.deactivate(allConstraints)
@@ -116,7 +137,8 @@ private extension FactTableViewCell {
             "topMargin": Metrics.top,
             "bottomMargin": Metrics.bottom,
             "leftMargin": Metrics.spacing,
-            "rightMargin": Metrics.spacing]
+            "rightMargin": Metrics.spacing,
+            "height": Metrics.minimumHeight]
         
         // factImageView is as wide as its superView and it is stuck to both sides
         allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-leftMargin-[factImageView]-rightMargin-|", options: [], metrics: metrics, views: views)
@@ -128,7 +150,7 @@ private extension FactTableViewCell {
         allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-leftMargin-[descriptionLabel]-rightMargin-|", options: [], metrics: metrics, views: views)
         
         // vertical constraints
-        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-topMargin-[factImageView]-verticalSpacing-[titleLabel(30)]-verticalSpacing-[descriptionLabel]-bottomMargin-|", options: [], metrics: metrics, views: views)
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-topMargin-[factImageView]-verticalSpacing-[titleLabel]-verticalSpacing-[descriptionLabel]-bottomMargin-|", options: [], metrics: metrics, views: views)
         
         NSLayoutConstraint.activate(allConstraints)
     }

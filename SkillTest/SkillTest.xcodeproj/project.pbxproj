@@ -11,13 +11,14 @@
 		3001FA7720E7AB8900E13AFA /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA7620E7AB8900E13AFA /* EmptyTableViewCell.swift */; };
 		3001FA7920E7ABC900E13AFA /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA7820E7ABC900E13AFA /* LoadingTableViewCell.swift */; };
 		3001FA7B20E7ABEE00E13AFA /* FactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA7A20E7ABEE00E13AFA /* FactTableViewCell.swift */; };
+		3001FA8120E8CE0700E13AFA /* NSMutableAttributedString+TextFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA8020E8CE0700E13AFA /* NSMutableAttributedString+TextFormatting.swift */; };
 		30AABDCF20E6582400D4E976 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABDCE20E6582400D4E976 /* AppDelegate.swift */; };
 		30AABDD620E6582400D4E976 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30AABDD520E6582400D4E976 /* Assets.xcassets */; };
 		30AABDE420E6582400D4E976 /* SkillTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABDE320E6582400D4E976 /* SkillTestTests.swift */; };
 		30AABDEF20E6582400D4E976 /* SkillTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABDEE20E6582400D4E976 /* SkillTestUITests.swift */; };
 		30AABDFE20E65BBF00D4E976 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABDFD20E65BBF00D4E976 /* APIClient.swift */; };
 		30AABE0120E65CCF00D4E976 /* Fact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABE0020E65CCF00D4E976 /* Fact.swift */; };
-		30AABE0420E65D9D00D4E976 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABE0320E65D9D00D4E976 /* Constants.swift */; };
+		30AABE0420E65D9D00D4E976 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABE0320E65D9D00D4E976 /* APIConstants.swift */; };
 		30AABE0920E68EEE00D4E976 /* FactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABE0820E68EEE00D4E976 /* FactsViewController.swift */; };
 		30AABE0B20E6902500D4E976 /* FactsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABE0A20E6902500D4E976 /* FactsViewModel.swift */; };
 		30AABE0D20E6907100D4E976 /* FactsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABE0C20E6907100D4E976 /* FactsDataSource.swift */; };
@@ -48,6 +49,7 @@
 		3001FA7620E7AB8900E13AFA /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
 		3001FA7820E7ABC900E13AFA /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
 		3001FA7A20E7ABEE00E13AFA /* FactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactTableViewCell.swift; sourceTree = "<group>"; };
+		3001FA8020E8CE0700E13AFA /* NSMutableAttributedString+TextFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+TextFormatting.swift"; sourceTree = "<group>"; };
 		30AABDCB20E6582400D4E976 /* SkillTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30AABDCE20E6582400D4E976 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30AABDD520E6582400D4E976 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -60,7 +62,7 @@
 		30AABDF020E6582400D4E976 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30AABDFD20E65BBF00D4E976 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		30AABE0020E65CCF00D4E976 /* Fact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fact.swift; sourceTree = "<group>"; };
-		30AABE0320E65D9D00D4E976 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		30AABE0320E65D9D00D4E976 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		30AABE0820E68EEE00D4E976 /* FactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsViewController.swift; sourceTree = "<group>"; };
 		30AABE0A20E6902500D4E976 /* FactsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsViewModel.swift; sourceTree = "<group>"; };
 		30AABE0C20E6907100D4E976 /* FactsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsDataSource.swift; sourceTree = "<group>"; };
@@ -115,6 +117,22 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		3001FA7E20E8CA9600E13AFA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				30AABE0A20E6902500D4E976 /* FactsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3001FA7F20E8CB2500E13AFA /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				30AABDCE20E6582400D4E976 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
 		30AABDC220E6582400D4E976 = {
 			isa = PBXGroup;
 			children = (
@@ -140,12 +158,13 @@
 		30AABDCD20E6582400D4E976 /* SkillTest */ = {
 			isa = PBXGroup;
 			children = (
-				30AABE0720E68ED700D4E976 /* Views */,
-				30AABE0220E65D8F00D4E976 /* Helpers */,
 				30AABDFF20E65CBF00D4E976 /* Models */,
-				30AABE0E20E6938A00D4E976 /* Extensions */,
+				30AABE0720E68ED700D4E976 /* Views */,
+				3001FA7E20E8CA9600E13AFA /* ViewModels */,
 				30AABDFC20E65BB300D4E976 /* Services */,
-				30AABDCE20E6582400D4E976 /* AppDelegate.swift */,
+				30AABE0E20E6938A00D4E976 /* Extensions */,
+				30AABE0220E65D8F00D4E976 /* Helpers */,
+				3001FA7F20E8CB2500E13AFA /* AppDelegate */,
 				30AABDD520E6582400D4E976 /* Assets.xcassets */,
 				30AABDDA20E6582400D4E976 /* Info.plist */,
 			);
@@ -189,7 +208,7 @@
 		30AABE0220E65D8F00D4E976 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				30AABE0320E65D9D00D4E976 /* Constants.swift */,
+				30AABE0320E65D9D00D4E976 /* APIConstants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -199,7 +218,6 @@
 			children = (
 				3001FA7520E7AB7500E13AFA /* Cells */,
 				30AABE0820E68EEE00D4E976 /* FactsViewController.swift */,
-				30AABE0A20E6902500D4E976 /* FactsViewModel.swift */,
 				30AABE0C20E6907100D4E976 /* FactsDataSource.swift */,
 			);
 			path = Views;
@@ -211,6 +229,7 @@
 				30AABE0F20E6944300D4E976 /* DataState.swift */,
 				30AABE1120E69C3C00D4E976 /* ErrorPresentable.swift */,
 				3001FA7320E7AB4C00E13AFA /* Reusable.swift */,
+				3001FA8020E8CE0700E13AFA /* NSMutableAttributedString+TextFormatting.swift */,
 			);
 			name = Extensions;
 			path = SkillTest/Extensions;
@@ -363,12 +382,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SkillTest/Pods-SkillTest-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -403,9 +424,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				30AABE0B20E6902500D4E976 /* FactsViewModel.swift in Sources */,
-				30AABE0420E65D9D00D4E976 /* Constants.swift in Sources */,
+				30AABE0420E65D9D00D4E976 /* APIConstants.swift in Sources */,
 				3001FA7920E7ABC900E13AFA /* LoadingTableViewCell.swift in Sources */,
 				30AABE0120E65CCF00D4E976 /* Fact.swift in Sources */,
+				3001FA8120E8CE0700E13AFA /* NSMutableAttributedString+TextFormatting.swift in Sources */,
 				30AABDCF20E6582400D4E976 /* AppDelegate.swift in Sources */,
 				3001FA7420E7AB4C00E13AFA /* Reusable.swift in Sources */,
 				30AABDFE20E65BBF00D4E976 /* APIClient.swift in Sources */,

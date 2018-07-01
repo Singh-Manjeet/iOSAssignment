@@ -8,6 +8,10 @@
 
 import Foundation
 
+private struct Design {
+    static let noTitle = "Anonymous"
+}
+
 // MARK: - FactsViewModelDelegate
 protocol FactsViewModelDelegate: class {
     func stateDidChange(_ state: ViewControllerAPIDataState<FactsContainer>)
@@ -29,19 +33,22 @@ final class FactsViewModel {
     }
     
     func fetchData() {
-        
-        APIClient.getFacts(url: Constants.baseUrl) { [weak self] (isSuccessful, country) in
-            guard let country = country,
-                  isSuccessful,
-                  let strongSelf = self else { return }
-            
-            strongSelf.country = country
-            let container = FactsContainer(facts: country.facts!)
-            strongSelf.state = .loaded(container)
+        DispatchQueue.global(qos: .background).async {
+            APIClient.getFacts(url: APIConstants.baseUrl) { [weak self] (isSuccessful, country) in
+                
+                guard let country = country,
+                    let facts = country.facts,
+                    isSuccessful,
+                    let strongSelf = self else { return }
+                
+                strongSelf.country = country
+                let container = FactsContainer(facts: facts)
+                strongSelf.state = .loaded(container)
+            }
         }
     }
     
     var title: String {
-        return country?.title ?? ""
+        return country?.title ?? Design.noTitle
     }
 }
