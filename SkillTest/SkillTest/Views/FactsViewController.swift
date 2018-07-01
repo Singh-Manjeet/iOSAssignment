@@ -130,21 +130,18 @@ extension FactsViewController: FactsViewModelDelegate {
             guard let strongSelf = self else { return }
             strongSelf.stopAnimating()
             strongSelf.refreshControl.endRefreshing()
-        }
-        
-        switch state {
-        case .loaded:
-            dataSource.state = state
+            strongSelf.dataSource.state = state
             
-            DispatchQueue.main.async { [weak self] in
-                guard let strongSelf = self else { return }
+            switch state {
+            case .loaded:
                 strongSelf.setNavigationTitle()
-                strongSelf.tableView.reloadData()
-                strongSelf.tableView.layoutIfNeeded()
+            case .error(let error):
+                strongSelf.presentError(with: error.message)
+            default: break
             }
-        case .error(let error):
-            presentError(with: error.message)
-        default: break
+            
+            strongSelf.tableView.reloadData()
+            strongSelf.tableView.layoutIfNeeded()
         }
     }
 }

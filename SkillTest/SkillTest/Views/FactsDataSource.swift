@@ -18,6 +18,7 @@ struct FactsContainer {
 enum FactsCellType {
     case facts(Fact)
     case empty
+    case error(APIError)
     case loading
 }
 
@@ -74,7 +75,7 @@ extension FactsDataSource {
             let factCell: FactTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
             factCell.populate(with: fact)
             return factCell
-        case .empty:
+        case .empty, .error:
             let emptyCell: EmptyTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
             return emptyCell
         }

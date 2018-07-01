@@ -12,6 +12,7 @@
 		3001FA7920E7ABC900E13AFA /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA7820E7ABC900E13AFA /* LoadingTableViewCell.swift */; };
 		3001FA7B20E7ABEE00E13AFA /* FactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA7A20E7ABEE00E13AFA /* FactTableViewCell.swift */; };
 		3001FA8120E8CE0700E13AFA /* NSMutableAttributedString+TextFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA8020E8CE0700E13AFA /* NSMutableAttributedString+TextFormatting.swift */; };
+		3001FA8320E8FDB900E13AFA /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA8220E8FDB900E13AFA /* Reachability.swift */; };
 		30AABDCF20E6582400D4E976 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABDCE20E6582400D4E976 /* AppDelegate.swift */; };
 		30AABDD620E6582400D4E976 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30AABDD520E6582400D4E976 /* Assets.xcassets */; };
 		30AABDE420E6582400D4E976 /* SkillTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABDE320E6582400D4E976 /* SkillTestTests.swift */; };
@@ -50,6 +51,7 @@
 		3001FA7820E7ABC900E13AFA /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
 		3001FA7A20E7ABEE00E13AFA /* FactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactTableViewCell.swift; sourceTree = "<group>"; };
 		3001FA8020E8CE0700E13AFA /* NSMutableAttributedString+TextFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+TextFormatting.swift"; sourceTree = "<group>"; };
+		3001FA8220E8FDB900E13AFA /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		30AABDCB20E6582400D4E976 /* SkillTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30AABDCE20E6582400D4E976 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30AABDD520E6582400D4E976 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				30AABE1120E69C3C00D4E976 /* ErrorPresentable.swift */,
 				3001FA7320E7AB4C00E13AFA /* Reusable.swift */,
 				3001FA8020E8CE0700E13AFA /* NSMutableAttributedString+TextFormatting.swift */,
+				3001FA8220E8FDB900E13AFA /* Reachability.swift */,
 			);
 			name = Extensions;
 			path = SkillTest/Extensions;
@@ -431,6 +434,7 @@
 				30AABDCF20E6582400D4E976 /* AppDelegate.swift in Sources */,
 				3001FA7420E7AB4C00E13AFA /* Reusable.swift in Sources */,
 				30AABDFE20E65BBF00D4E976 /* APIClient.swift in Sources */,
+				3001FA8320E8FDB900E13AFA /* Reachability.swift in Sources */,
 				30AABE1020E6944300D4E976 /* DataState.swift in Sources */,
 				30AABE0920E68EEE00D4E976 /* FactsViewController.swift in Sources */,
 				3001FA7B20E7ABEE00E13AFA /* FactTableViewCell.swift in Sources */,
