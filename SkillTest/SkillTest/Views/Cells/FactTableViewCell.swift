@@ -11,10 +11,12 @@ import UIKit
 import SnapKit
 import Kingfisher
 
+// MARK: - Constants
 private struct Design {
     static let placeHolderImage = UIImage(named:"placeholderImage")
 }
 
+// MARK: - Metrics
 private enum Metrics {
     static let spacing: CGFloat = 13.0
     static let top: CGFloat = 13.0
@@ -30,7 +32,7 @@ class FactTableViewCell: UITableViewCell, Reusable {
     private var factImageView: UIImageView!
     private var allConstraints: [NSLayoutConstraint] = []
     
-    //MARK: init
+    //MARK: - init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

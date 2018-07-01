@@ -9,28 +9,58 @@
 import XCTest
 @testable import SkillTest
 
+/**
+ * To test if the networking works appropriately
+ * - All test cases can be extended further..
+ */
 class SkillTestTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testCalback() {
+        
+        // 1. Setup the expectation
+        let expectation = XCTestExpectation(description: "APIClient fetches data and succeeds")
+        
+        // 2. Exercise and verify the behaviour as usual
+        APIClient.getFacts(url: APIConstants.baseUrl, onCompletion: { (isSuccessful, country) in
+            XCTAssert(isSuccessful)
+            expectation.fulfill()
+        })
+        
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testURLConnection() {
+        let url = APIConstants.baseUrl
+        let urlExpectation = expectation(description: "GET \(url)")
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: url) { (data, response, error) in
+            
+            XCTAssertNotNil(data, "data should not be nil")
+            XCTAssertNil(error, "error should be nil")
+            
+            if let response = response as? HTTPURLResponse,
+                let responseURL = response.url,
+                let mimeType = response.mimeType
+            {
+                
+                XCTAssertEqual(responseURL.absoluteString, url.absoluteString, APIConstants.baseUrl.absoluteString)
+                XCTAssertEqual(response.statusCode, 200, "Response status code should be 200")
+                XCTAssertEqual(mimeType, "text/plain", "Response content type should be json/html")
+                
+            } else {
+                XCTFail("Response was not NSHTTPURLResponse")
+            }
+            
+            urlExpectation.fulfill()
+        }
+        
+        task.resume()
+        
+        waitForExpectations(timeout: task.originalRequest!.timeoutInterval) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+            task.cancel()
         }
     }
-    
 }

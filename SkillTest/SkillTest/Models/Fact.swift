@@ -8,11 +8,6 @@
 
 import Foundation
 
-struct Country: Codable {
-    let title: String?
-    let facts: [Fact]?
-}
-
 struct Fact: Codable {
     let title: String?
     let description: String?

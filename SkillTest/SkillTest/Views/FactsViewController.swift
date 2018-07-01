@@ -34,7 +34,7 @@ private struct Design {
 
 class FactsViewController: UIViewController, NVActivityIndicatorViewable {
     
-    // MARK: - Vars & IBOutlets
+    // MARK: - Vars
     private var tableView: UITableView!
     private var dataSource: FactsDataSource!
     private var viewModel: FactsViewModel!
@@ -66,11 +66,11 @@ private extension FactsViewController {
     func setupTableView() {
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tableView)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.delegate = self
         tableView.estimatedRowHeight = Design.estimatedTableViewCellHeight
         tableView.separatorInset = .zero
+        view.addSubview(tableView)
         tableView.addSubview(refreshControl)
         tableView.sendSubview(toBack: refreshControl)
         

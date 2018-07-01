@@ -15,10 +15,10 @@ private struct Design {
 }
 
 class EmptyTableViewCell: UITableViewCell, Reusable {
-    //MARK: Subviews
+    // MARK: - Vars
     private var titleLabel: UILabel!
     
-    //MARK: init
+    // MARK: - init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubViewsAndlayout()

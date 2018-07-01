@@ -13,6 +13,8 @@
 		3001FA7B20E7ABEE00E13AFA /* FactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA7A20E7ABEE00E13AFA /* FactTableViewCell.swift */; };
 		3001FA8120E8CE0700E13AFA /* NSMutableAttributedString+TextFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA8020E8CE0700E13AFA /* NSMutableAttributedString+TextFormatting.swift */; };
 		3001FA8320E8FDB900E13AFA /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA8220E8FDB900E13AFA /* Reachability.swift */; };
+		3001FA8520E9096300E13AFA /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA8420E9096300E13AFA /* Country.swift */; };
+		3001FA8720E9142A00E13AFA /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3001FA8620E9142A00E13AFA /* APIClientTests.swift */; };
 		30AABDCF20E6582400D4E976 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABDCE20E6582400D4E976 /* AppDelegate.swift */; };
 		30AABDD620E6582400D4E976 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30AABDD520E6582400D4E976 /* Assets.xcassets */; };
 		30AABDE420E6582400D4E976 /* SkillTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AABDE320E6582400D4E976 /* SkillTestTests.swift */; };
@@ -52,6 +54,8 @@
 		3001FA7A20E7ABEE00E13AFA /* FactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactTableViewCell.swift; sourceTree = "<group>"; };
 		3001FA8020E8CE0700E13AFA /* NSMutableAttributedString+TextFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+TextFormatting.swift"; sourceTree = "<group>"; };
 		3001FA8220E8FDB900E13AFA /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		3001FA8420E9096300E13AFA /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		3001FA8620E9142A00E13AFA /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
 		30AABDCB20E6582400D4E976 /* SkillTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30AABDCE20E6582400D4E976 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30AABDD520E6582400D4E976 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 			children = (
 				30AABDE320E6582400D4E976 /* SkillTestTests.swift */,
 				30AABDE520E6582400D4E976 /* Info.plist */,
+				3001FA8620E9142A00E13AFA /* APIClientTests.swift */,
 			);
 			path = SkillTestTests;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				30AABE0020E65CCF00D4E976 /* Fact.swift */,
+				3001FA8420E9096300E13AFA /* Country.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -438,6 +444,7 @@
 				30AABE1020E6944300D4E976 /* DataState.swift in Sources */,
 				30AABE0920E68EEE00D4E976 /* FactsViewController.swift in Sources */,
 				3001FA7B20E7ABEE00E13AFA /* FactTableViewCell.swift in Sources */,
+				3001FA8520E9096300E13AFA /* Country.swift in Sources */,
 				30AABE0D20E6907100D4E976 /* FactsDataSource.swift in Sources */,
 				30AABE1220E69C3C00D4E976 /* ErrorPresentable.swift in Sources */,
 				3001FA7720E7AB8900E13AFA /* EmptyTableViewCell.swift in Sources */,
@@ -449,6 +456,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30AABDE420E6582400D4E976 /* SkillTestTests.swift in Sources */,
+				3001FA8720E9142A00E13AFA /* APIClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

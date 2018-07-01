@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 
 class LoadingTableViewCell: UITableViewCell, Reusable {
-    //MARK: Subviews
+    // MARK: - Vars
     private var activityIndicator: UIActivityIndicatorView {
         return UIActivityIndicatorView(frame: .zero)
     }
     
-    //MARK: init
+    // MARK: - init
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubViewsAndlayout()
